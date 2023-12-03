@@ -16,18 +16,15 @@ public class ModelTests
 
         var motherboard = new Motherboard
         {
-            Cost = 16999
+            Cost = 17000
         };
 
         var processor = new Processor
         {
-            Cost = 13799
+            Cost = 13800
         };
 
-        var ram = new RAM
-        {
-            Cost = 9699
-        };
+        var ram = new RAM();
 
         var ssd = new SSD
         {
@@ -36,7 +33,7 @@ public class ModelTests
 
         var powerSupply = new PowerSupply
         {
-            Cost = 10799
+            Cost = 10800
         };
 
         var graphicCard = new GraphicCard
@@ -46,7 +43,7 @@ public class ModelTests
 
         var cooler = new Cooler
         {
-            Cost = 8599
+            Cost = 8600
         };
 
         #region Инициализация деталей 
@@ -85,7 +82,7 @@ public class ModelTests
         var totalCost = pc.Cost;
 
         // Assert
-        Assert.That(totalCost, Is.EqualTo(131393));
+        Assert.That(totalCost, Is.EqualTo(121700));
     }
 
     [Test]
@@ -202,7 +199,7 @@ public class ModelTests
         // Act
         var targetPartInPC = pc.Parts.Find(p => p.GetType().GenericTypeArguments[0] == typeof(RAM));
         var ramPartInPC = targetPartInPC as ComponentComplect<RAM>;
-        var ramComplectCost = ramPartInPC?.TotalCost;
+        var ramComplectCost = ramPartInPC?.ComplectCost;
 
         // Assert
         Assert.That(ramComplectCost, Is.EqualTo(12500));
