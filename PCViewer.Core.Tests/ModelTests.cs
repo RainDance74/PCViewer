@@ -28,7 +28,7 @@ public class ModelTests
 
         var ssd = new SSD
         {
-            Cost = 11799
+            Cost = 11800
         };
 
         var powerSupply = new PowerSupply
@@ -52,7 +52,7 @@ public class ModelTests
 
         var processorPart = new ComponentComplect<Processor>(processor);
 
-        var ramPart = new ComponentComplect<RAM>(ram, ram); // Вставляем 2 одинаковых плашки ОЗУ
+        var ramPart = new ComponentComplect<RAM>(9700, ram, ram); // Вставляем 2 одинаковых плашки ОЗУ
 
         var ssdPart = new ComponentComplect<SSD>(ssd);
 
