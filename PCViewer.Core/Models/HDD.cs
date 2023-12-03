@@ -6,6 +6,9 @@ namespace PCViewer.Core.Models
 {
     public class HDD : StorageDevice
     {
+        /// <summary>
+        /// Скорость вращения вентилей
+        /// </summary>
         public int SpinSpeed { get; set; }
     }
 }

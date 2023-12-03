@@ -2,6 +2,9 @@
 {
     public class Cooler : BaseComponent
     {
+        /// <summary>
+        /// Рассеиваемая мощность
+        /// </summary>
         public int DissipationPower { get; set; }
     }
 }
