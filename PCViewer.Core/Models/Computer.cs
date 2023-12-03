@@ -8,7 +8,7 @@ namespace PCViewer.Core.Models
         public List<ComponentComplect> Parts { get; set; }
         public int Cost 
         { 
-            get => Parts.Sum(p => p.TotalCost); 
+            get => Parts.Sum(p => p.ComplectCost); 
         }
 
         public Computer() 

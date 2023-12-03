@@ -12,7 +12,7 @@ namespace PCViewer.Core.Models
         public float Weight { get; set; }
         public new int Cost 
         {
-            get => _laptopCost + Parts.Sum(p => p.TotalCost); 
+            get => _laptopCost + Parts.Sum(p => p.ComplectCost); 
             set => _laptopCost = value; 
         }
     }
