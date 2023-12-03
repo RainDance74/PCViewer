@@ -13,8 +13,8 @@ public static class ServiceCollectionExtensions
         var cfgServicesMethod = startupType.GetMethod(ConfigureServicesMethodName, [typeof(IServiceCollection)]);
         var hasConfigCtor = startupType.GetConstructor([typeof(IConfiguration)]) != null;
         var startup = hasConfigCtor
-                        ? (TStartup)Activator.CreateInstance(typeof(TStartup), configuration)
-                        : (TStartup)Activator.CreateInstance(typeof(TStartup), null);
+                        ? Activator.CreateInstance(typeof(TStartup), configuration) as TStartup
+                        : Activator.CreateInstance(typeof(TStartup), null) as TStartup;
 
         cfgServicesMethod?.Invoke(startup, new object[] { services });
 
