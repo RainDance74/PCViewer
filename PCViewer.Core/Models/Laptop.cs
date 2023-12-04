@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 
 namespace PCViewer.Core.Models
 {
@@ -32,6 +33,44 @@ namespace PCViewer.Core.Models
         {
             get => _laptopCost + Parts.Sum(p => p.ComplectCost); 
             set => _laptopCost = value; 
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("-------------------------------------------");
+            sb.AppendLine($"Суммарная цена ноутбука {Brand + " " + Model}: {Cost}р.");
+            #region Характеристики
+            if(!string.IsNullOrEmpty(Color))
+            {
+                sb.AppendLine($"Цвет ноутбука: {Color}");
+            }
+
+            if(Weight != 0.0f)
+            {
+                sb.AppendLine($"Вес ноутбука: {Weight}кг");
+            }
+
+            if(!string.IsNullOrEmpty(Description))
+            {
+                sb.AppendLine("-------");
+                sb.AppendLine(Description);
+                sb.AppendLine("-------");
+            }
+            #endregion
+            sb.AppendLine();
+
+            // TODO: Decompose to a method
+            sb.AppendLine("Информация о комплектующих предоставлена ниже.");
+            sb.AppendLine();
+
+            foreach(var complect in Parts)
+            {
+                sb.AppendLine(complect.ToString());
+            }
+
+            return sb.ToString();
         }
     }
 }

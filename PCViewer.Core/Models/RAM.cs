@@ -22,5 +22,34 @@ namespace PCViewer.Core.Models
         /// Форм фактор (SO-DIMM/DIMM)
         /// </summary>
         public string FormFactor { get; set; }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(base.ToString());
+
+            if(Capacity != 0) 
+            {
+                sb.AppendLine($"Объем плашки: {Capacity}");
+            }
+
+            if(string.IsNullOrEmpty(Type))
+            {
+                sb.AppendLine($"Поколение: {Type}");
+            }
+
+            if(Speed != 0)
+            {
+                sb.AppendLine($"Частота плашки: {Speed}МГц");
+            }
+
+            if(!string.IsNullOrEmpty(FormFactor)) 
+            {
+                sb.AppendLine($"Форм-фактор: {FormFactor}");
+            }
+
+            return sb.ToString();
+        }
     }
 }

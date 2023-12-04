@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace PCViewer.Core.Models
 {
@@ -20,6 +21,23 @@ namespace PCViewer.Core.Models
         public Computer() 
         {
             Parts = new List<ComponentComplect>();
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("-------------------------------------------");
+            sb.AppendLine($"Суммарная цена данного компьютера {Cost}р.");
+            sb.AppendLine("Информация о комплектующих предоставлена ниже.");
+            sb.AppendLine();
+
+            foreach(var complect in Parts)
+            {
+                sb.AppendLine(complect.ToString());
+            }
+
+            return sb.ToString();
         }
     }
 }

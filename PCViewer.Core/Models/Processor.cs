@@ -30,5 +30,48 @@ namespace PCViewer.Core.Models
         /// Видеокарта встроенная в процессор
         /// </summary>
         public GraphicCard GraphicCard { get; set; }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(base.ToString());
+
+            if(!string.IsNullOrEmpty(Socket))
+            {
+                sb.AppendLine($"Сокет: {Socket}");
+            }
+
+            if(Frequency != 0.0f)
+            {
+                sb.AppendLine($"Базовая частота работы: {Frequency}ГГц");
+            }
+
+            if(MaxFrequency != 0.0f)
+            {
+                sb.AppendLine($"Максимальная частота работы: {Frequency}ГГц");
+            }
+
+            if(CoreNumber != 0) 
+            {
+                sb.AppendLine($"Колличество ядер: {CoreNumber}");
+            }
+
+            if(ThreadNumber != 0)
+            {
+                sb.AppendLine($"Колличество потоков: {ThreadNumber}");
+            }
+
+            if(GraphicCard != null)
+            {
+                sb.AppendLine();
+                sb.AppendLine("Встроенная видеокарта:");
+                sb.AppendLine("----------");
+                sb.AppendLine(GraphicCard.ToString());
+                sb.AppendLine("----------");
+            }
+
+            return sb.ToString();
+        }
     }
 }
