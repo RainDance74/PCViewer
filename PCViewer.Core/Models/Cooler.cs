@@ -5,6 +5,6 @@
         /// <summary>
         /// Рассеиваемая мощность
         /// </summary>
-        public int DissipationPower { get; set; }
+        public int TDP { get; set; }
     }
 }

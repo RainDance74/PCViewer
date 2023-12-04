@@ -123,7 +123,7 @@ public class MyComputerBuilder : ComputerBuilder
     {
         var cooler = new Cooler
         {
-            DissipationPower = 250,
+            TDP = 250,
             Model = "MAG CORELIQUID",
             Brand = "MSI",
             Cost = 8599
