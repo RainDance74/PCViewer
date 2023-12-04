@@ -22,7 +22,7 @@ namespace PCViewer.Core.Models
         /// </summary>
         public string Color { get; set; }
         /// <summary>
-        /// Вес ноутбука
+        /// Вес ноутбука, указывается в килограммах
         /// </summary>
         public float Weight { get; set; }
         /// <summary>

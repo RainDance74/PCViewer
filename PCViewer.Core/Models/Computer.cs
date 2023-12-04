@@ -10,7 +10,7 @@ namespace PCViewer.Core.Models
         /// </summary>
         public List<ComponentComplect> Parts { get; set; }
         /// <summary>
-        /// Цена компьютера
+        /// Цена компьютера в рублях
         /// </summary>
         public int Cost 
         { 
