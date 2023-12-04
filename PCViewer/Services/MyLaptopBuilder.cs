@@ -13,6 +13,7 @@ public class MyLaptopBuilder : LaptopBuilder
 
     public override void SetUpLaptop()
     {
+        _laptop.Cost = 42999;
         _laptop.Color = "Белый";
         _laptop.Weight = 1.25f;
         _laptop.Model = "Swift 3 (SF314-44)";
@@ -74,7 +75,7 @@ public class MyLaptopBuilder : LaptopBuilder
             Type = "SATA"
         };
 
-        var ssdComplect = new ComponentComplect<SSD>(ssd1);
+        var ssdComplect = new ComponentComplect<SSD>(ssd1, ssd2);
 
         _laptop.Parts.Add(ssdComplect);
     }
