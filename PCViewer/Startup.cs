@@ -11,5 +11,7 @@ internal class Startup(IConfiguration configuration)
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddTransient<IApplicationRunner, ApplicationRunner>();
+        services.AddTransient<ComputerBuilder, MyComputerBuilder>();
+        services.AddTransient<LaptopBuilder, MyLaptopBuilder>();
     }
 }
