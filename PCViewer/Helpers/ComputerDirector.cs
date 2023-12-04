@@ -1,9 +1,9 @@
-﻿using PCViewer.Services;
+﻿using PCViewer.Contracts.Services;
 
 namespace PCViewer.Helpers;
 public class ComputerDirector
 {
-    public static void BuildComputer(MyComputerBuilder builder) 
+    public static void BuildComputer(ComputerBuilder builder) 
     {
         builder.BuildMotherboard();
         builder.BuildProcessor();
