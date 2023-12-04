@@ -11,7 +11,7 @@
         /// </summary>
         public string Brand { get; set; }
         /// <summary>
-        /// Цена компанента
+        /// Цена компонента, указывается в рублях
         /// </summary>
         public int Cost { get; set; }
     }
