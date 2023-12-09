@@ -1,4 +1,5 @@
 ﻿using PCViewer.Contracts.Services;
+using PCViewer.Core.Contracts;
 using PCViewer.Core.Models;
 using PCViewer.Helpers;
 using System.Text;
@@ -6,14 +7,13 @@ using System.Text;
 namespace PCViewer.Services;
 internal class ApplicationRunner : IApplicationRunner
 {
+    private readonly IDataStore<Computer> _dataStore;
     private readonly ComputerBuilder _computerBuilder;
     private readonly LaptopBuilder _laptopBuilder;
 
-    private Computer? myComputer;
-    private Laptop? myLaptop;
-
-    public ApplicationRunner(ComputerBuilder computerBuilder, LaptopBuilder laptopBuilder)
+    public ApplicationRunner(IDataStore<Computer> dataStore, ComputerBuilder computerBuilder, LaptopBuilder laptopBuilder)
     {
+        _dataStore = dataStore;
         _computerBuilder = computerBuilder;
         _laptopBuilder = laptopBuilder;
     }
@@ -36,11 +36,11 @@ internal class ApplicationRunner : IApplicationRunner
         Console.WriteLine();
         Console.WriteLine("Выберите действие:");
 
-        Console.WriteLine("1. Собрать мой компьютер.");
-        Console.WriteLine("2. Собрать мой ноутбук.");
-        if(myComputer is not null || myLaptop is not null)
+        Console.WriteLine("1. Собрать мой компьютер и добавить в хранилище.");
+        Console.WriteLine("2. Собрать мой ноутбук и добавить в хранилище.");
+        if(_dataStore.GetAll().Any())
         {
-            Console.WriteLine("3. Напечатать данные моего устройства.");
+            Console.WriteLine("3. Напечатать данные моего устройства из хранилища.");
         }
         Console.WriteLine("Или нажмите другую клавишу чтобы завершить программу.");
         Console.WriteLine();
@@ -50,9 +50,10 @@ internal class ApplicationRunner : IApplicationRunner
             case ConsoleKey.D1:
                 Console.WriteLine();
 
-                if(myComputer is null)
+                if(!_dataStore.GetAll().Any(device => device.GetType() == typeof(Computer)))
                 {
-                    myComputer = GetMyComputer();
+                     var myComputer = GetMyComputer();
+                    _dataStore.Add(myComputer);
                     Console.WriteLine("Вы успешно собрали мой компьютер!");
                     ChooseActionDialog();
                     break;
@@ -64,9 +65,10 @@ internal class ApplicationRunner : IApplicationRunner
             case ConsoleKey.D2:
                 Console.WriteLine();
 
-                if(myLaptop is null)
+                if(!_dataStore.GetAll().Any(device => device.GetType() == typeof(Laptop)))
                 {
-                    myLaptop = GetMyLaptop();
+                    var myLaptop = GetMyLaptop();
+                    _dataStore.Add(myLaptop);
                     Console.WriteLine("Вы успешно собрали мой ноутбук!");
                     ChooseActionDialog();
                     break;
@@ -78,7 +80,7 @@ internal class ApplicationRunner : IApplicationRunner
             case ConsoleKey.D3:
                 Console.WriteLine();
 
-                if(myComputer is null && myLaptop is null)
+                if(!_dataStore.GetAll().Any())
                 {
                     return;
                 }
@@ -94,9 +96,9 @@ internal class ApplicationRunner : IApplicationRunner
     private void PrintDialog()
     {
         Console.WriteLine();
-        if(myComputer is null || myLaptop is null) 
+        if(_dataStore.GetAll().Count() == 1) 
         {
-            var notNullDevice = myComputer ?? myLaptop;
+            var notNullDevice = _dataStore.GetAll().First();
 
             Console.WriteLine($"Вы хотите вывести информацию о моем {(notNullDevice?.GetType() == typeof(Computer) ? "компьютере" : "ноутбуке")}? Д/н");
         areyousure:
@@ -126,11 +128,25 @@ internal class ApplicationRunner : IApplicationRunner
         switch(Console.ReadKey().Key)
         {
             case ConsoleKey.D1:
-                Console.WriteLine(myComputer.ToString());
+
+                var computerText = _dataStore
+                    .GetAll()
+                    .First(device => device.GetType() == typeof(Computer))
+                    .ToString();
+
+                Console.WriteLine(computerText);
                 return;
+
             case ConsoleKey.D2:
-                Console.WriteLine(myLaptop.ToString());
+
+                var laptopText = _dataStore
+                    .GetAll()
+                    .First(device => device.GetType() == typeof(Laptop))
+                    .ToString();
+
+                Console.WriteLine(laptopText);
                 return;
+
             default:
                 return;
         }
