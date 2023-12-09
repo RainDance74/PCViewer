@@ -33,12 +33,14 @@ internal class ApplicationRunner : IApplicationRunner
 
     private void ChooseActionDialog()
     {
+        var computers = _dataStore.GetAll();
+
         Console.WriteLine();
         Console.WriteLine("Выберите действие:");
 
         Console.WriteLine("1. Собрать мой компьютер и добавить в хранилище.");
         Console.WriteLine("2. Собрать мой ноутбук и добавить в хранилище.");
-        if(_dataStore.GetAll().Any())
+        if(computers.Any())
         {
             Console.WriteLine("3. Напечатать данные моего устройства из хранилища.");
         }
@@ -50,7 +52,7 @@ internal class ApplicationRunner : IApplicationRunner
             case ConsoleKey.D1:
                 Console.WriteLine();
 
-                if(!_dataStore.GetAll().Any(device => device.GetType() == typeof(Computer)))
+                if(!computers.Any(device => device.GetType() == typeof(Computer)))
                 {
                      var myComputer = GetMyComputer();
                     _dataStore.Add(myComputer);
@@ -65,7 +67,7 @@ internal class ApplicationRunner : IApplicationRunner
             case ConsoleKey.D2:
                 Console.WriteLine();
 
-                if(!_dataStore.GetAll().Any(device => device.GetType() == typeof(Laptop)))
+                if(!computers.Any(device => device.GetType() == typeof(Laptop)))
                 {
                     var myLaptop = GetMyLaptop();
                     _dataStore.Add(myLaptop);
@@ -80,7 +82,7 @@ internal class ApplicationRunner : IApplicationRunner
             case ConsoleKey.D3:
                 Console.WriteLine();
 
-                if(!_dataStore.GetAll().Any())
+                if(!computers.Any())
                 {
                     return;
                 }
@@ -95,8 +97,10 @@ internal class ApplicationRunner : IApplicationRunner
 
     private void PrintDialog()
     {
+        var computers = _dataStore.GetAll();
+
         Console.WriteLine();
-        if(_dataStore.GetAll().Count() == 1) 
+        if(computers.Count() == 1) 
         {
             var notNullDevice = _dataStore.GetAll().First();
 
