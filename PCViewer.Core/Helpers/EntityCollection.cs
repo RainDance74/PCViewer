@@ -82,6 +82,19 @@ namespace PCViewer.Core.Helpers
             _entities = newArray;
         }
 
+        public void SortBy(Comparison<T> comparison)
+        {
+            Array.Sort(_entities, comparison);
+        }
+
+        public void Apply(Action<T> action)
+        {
+            for (int i = 0; i < _entities.Length; i++)
+            {
+                action(_entities[i]);
+            }
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             foreach(T entity in _entities)

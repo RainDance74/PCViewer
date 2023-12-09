@@ -30,6 +30,21 @@ namespace PCViewer.Core.Services
             }
         }
 
+        public void SortBy(Comparison<T> comparison)
+        {
+            _entities.SortBy(comparison);
+        }
+
+        public void Apply(Action<T> action)
+        {
+            _entities.Apply(action);
+        }
+
+        public T First(Func<T, bool> predicate)
+        {
+            return _entities.First(predicate);
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _entities;
