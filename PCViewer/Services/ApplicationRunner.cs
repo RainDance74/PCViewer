@@ -43,6 +43,11 @@ internal class ApplicationRunner : IApplicationRunner
         if(computers.Any())
         {
             Console.WriteLine("3. Напечатать данные моего устройства из хранилища.");
+
+            if(computers.Count() > 1)
+            {
+                Console.WriteLine("4. Отсортировать элементы по...");
+            }
         }
         Console.WriteLine("Или нажмите другую клавишу чтобы завершить программу.");
         Console.WriteLine();
@@ -88,6 +93,10 @@ internal class ApplicationRunner : IApplicationRunner
                 }
                 
                 PrintDialog();
+                ChooseActionDialog();
+                break;
+            case ConsoleKey.D4:
+                SortDialog();
                 ChooseActionDialog();
                 break;
             default:
@@ -149,6 +158,42 @@ internal class ApplicationRunner : IApplicationRunner
                     .ToString();
 
                 Console.WriteLine(laptopText);
+                return;
+
+            default:
+                return;
+        }
+    }
+
+    private void SortDialog()
+    {
+        Console.WriteLine();
+        Console.WriteLine("1. Вначале дорогие.");
+        Console.WriteLine("2. Вначале дешевые.");
+        Console.WriteLine("3. Вначале компьютеры.");
+        Console.WriteLine("4. Вначале ноутбуки.");
+        Console.WriteLine();
+
+        switch (Console.ReadKey().Key)
+        {
+            case ConsoleKey.D1:
+
+                _dataStore.SortBy((x, y) => y.Cost.CompareTo(x.Cost));
+                return;
+
+            case ConsoleKey.D2:
+
+                _dataStore.SortBy((x, y) => x.Cost.CompareTo(y.Cost));
+                return;
+
+            case ConsoleKey.D3:
+
+                _dataStore.SortBy((x, y) => y.GetType().Name.Length.CompareTo(x.GetType().Name.Length));
+                return;
+
+            case ConsoleKey.D4:
+
+                _dataStore.SortBy((x, y) => x.GetType().Name.Length.CompareTo(y.GetType().Name.Length));
                 return;
 
             default:
