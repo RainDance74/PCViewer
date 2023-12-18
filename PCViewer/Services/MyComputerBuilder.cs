@@ -1,14 +1,20 @@
 ﻿using PCViewer.Contracts.Services;
+using PCViewer.Core.Contracts;
 using PCViewer.Core.Models;
+using PCViewer.Core.Services;
+using System.Runtime.CompilerServices;
 
 namespace PCViewer.Services;
 public class MyComputerBuilder : ComputerBuilder
 {
+    
     private readonly Computer _computer;
+    private readonly ILogger _logger;
 
-    public MyComputerBuilder() 
+    public MyComputerBuilder(ILogger logger)
     {
         _computer = new Computer();
+        _logger = logger;
     }
 
     public override void BuildMotherboard()
@@ -23,6 +29,8 @@ public class MyComputerBuilder : ComputerBuilder
         };
 
         var motherboardPart = new ComponentComplect<Motherboard>(motherboard);
+
+        _logger.Log("Собран комплект материнской платы");
 
         _computer.Parts.Add(motherboardPart);
     }
@@ -45,6 +53,8 @@ public class MyComputerBuilder : ComputerBuilder
         };
 
         var processorPart = new ComponentComplect<Processor>(processor);
+
+        _logger.Log("Собран комплект процессора");
 
         _computer.Parts.Add(processorPart);
     }
@@ -70,6 +80,8 @@ public class MyComputerBuilder : ComputerBuilder
 
         var ramComplect = new ComponentComplect<RAM>(9699, ram1, ram2);
 
+        _logger.Log("Собран комплект ОЗУ");
+
         _computer.Parts.Add(ramComplect);
     }
     public override void BuildStorageDevice()
@@ -87,6 +99,8 @@ public class MyComputerBuilder : ComputerBuilder
 
         var ssdComplect = new ComponentComplect<SSD>(ssd);
 
+        _logger.Log("Собран комплект SSD");
+
         _computer.Parts.Add(ssdComplect);
     }
     public override void BuildPowerSupply()
@@ -101,6 +115,8 @@ public class MyComputerBuilder : ComputerBuilder
         };
 
         var powerSupplyComplect = new ComponentComplect<PowerSupply>(powerSupply);
+
+        _logger.Log("Собран комплект БП");
 
         _computer.Parts.Add(powerSupplyComplect);
     }
@@ -117,6 +133,8 @@ public class MyComputerBuilder : ComputerBuilder
 
         var graphicCardComplect = new ComponentComplect<GraphicCard>(graphicCard);
 
+        _logger.Log("Собран комплект видеокарты");
+
         _computer.Parts.Add(graphicCardComplect);
     }
     public override void BuildCooler()
@@ -131,10 +149,13 @@ public class MyComputerBuilder : ComputerBuilder
 
         var coolerComplect = new ComponentComplect<Cooler>(cooler);
 
+        _logger.Log("Собран комплект кулера");
+
         _computer.Parts.Add(coolerComplect);
     }
     public override Computer GetResult()
     {
+        _logger.Log($"Возвращение экземпляра компьютера из {typeof(MyComputerBuilder).Name}");
         return _computer;
     }
 }

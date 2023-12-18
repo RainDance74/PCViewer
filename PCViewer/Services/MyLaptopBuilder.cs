@@ -1,14 +1,18 @@
 ﻿using PCViewer.Contracts.Services;
+using PCViewer.Core.Contracts;
 using PCViewer.Core.Models;
+using PCViewer.Core.Services;
 
 namespace PCViewer.Services;
 public class MyLaptopBuilder : LaptopBuilder
 {
     private readonly Laptop _laptop;
+    private readonly ILogger _logger;
 
-    public MyLaptopBuilder()
+    public MyLaptopBuilder(ILogger logger)
     {
         _laptop = new Laptop();
+        _logger = logger;
     }
 
     public override void SetUpLaptop()
@@ -19,6 +23,7 @@ public class MyLaptopBuilder : LaptopBuilder
         _laptop.Model = "Swift 3 (SF314-44)";
         _laptop.Brand = "Acer";
         _laptop.Description = "Acer Swift 3 разработан с прицелом на массового потребителя: он доступный и мобильный, хорошо собран, радует хорошей производительностью и удобной клавиатурой, а также имеет качественный дисплей. Более того - в этой модели есть также порт Thunderbolt 4.";
+        _logger.Log("Ноутбук настроен");
     }
 
     public override void BuildProcessor()
@@ -40,6 +45,8 @@ public class MyLaptopBuilder : LaptopBuilder
 
         var processorComplect = new ComponentComplect<Processor>(processor);
 
+        _logger.Log("Собран комплект процессора");
+
         _laptop.Parts.Add(processorComplect);
     }
     public override void BuildRam()
@@ -53,6 +60,8 @@ public class MyLaptopBuilder : LaptopBuilder
         };
 
         var ramComplect = new ComponentComplect<RAM>(ram);
+
+        _logger.Log("Собран комплект ОЗУ");
 
         _laptop.Parts.Add(ramComplect);
     }
@@ -77,6 +86,8 @@ public class MyLaptopBuilder : LaptopBuilder
 
         var ssdComplect = new ComponentComplect<SSD>(ssd1, ssd2);
 
+        _logger.Log("Собран комплект SSD");
+
         _laptop.Parts.Add(ssdComplect);
     }
     public override void BuildGraphicCard() { }
@@ -89,10 +100,13 @@ public class MyLaptopBuilder : LaptopBuilder
 
         var batteryComplect = new ComponentComplect<Battery>(battery);
 
+        _logger.Log("Собран комплект батареи");
+
         _laptop.Parts.Add(batteryComplect);
     }
     public override Laptop GetResult()
     {
+        _logger.Log($"Возвращение экземпляра ноутбука из {typeof(MyLaptopBuilder).Name}");
         return _laptop;
     }
 }
