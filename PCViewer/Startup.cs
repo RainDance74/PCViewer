@@ -18,6 +18,20 @@ internal class Startup(IConfiguration configuration)
         services.AddTransient<ComputerBuilder, MyComputerBuilder>();
         services.AddTransient<LaptopBuilder, MyLaptopBuilder>();
 
+        services.AddSingleton<ILogger, Logger>();
+        services.AddSingleton<DebugWriter>(services => 
+        {
+            var debugWriter = new DebugWriter();
+            services.GetRequiredService<ILogger>().OnLog += debugWriter.Write;
+            return debugWriter;
+        });
+        services.AddSingleton<FileWriter>(services =>
+        {
+            var fileWriter = new FileWriter();
+            services.GetRequiredService<ILogger>().OnLog += fileWriter.Write;
+            return fileWriter;
+        });
+
         services.AddTransient<IApplicationRunner, ApplicationRunner>();
     }
 }

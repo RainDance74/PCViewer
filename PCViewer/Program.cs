@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using PCViewer;
 using PCViewer.Contracts.Services;
+using PCViewer.Core.Services;
 using PCViewer.Extensions;
 
 internal class Program
@@ -14,6 +15,8 @@ internal class Program
             .BuildServiceProvider();
         var runner = serviceProvider
             .GetRequiredService<IApplicationRunner>();
+        serviceProvider.GetRequiredService<DebugWriter>();
+        serviceProvider.GetRequiredService<FileWriter>();
         runner.Run();
     }
 
