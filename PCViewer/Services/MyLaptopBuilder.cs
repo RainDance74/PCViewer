@@ -73,15 +73,15 @@ public class MyLaptopBuilder : LaptopBuilder
             Type = "NVMe",
         };
 
-        var ssd2 = new SSD
+        var ssd2 = new HDD
         {
-            Brand = "Kingston",
-            Model = "KC600",
-            Capacity = 512,
+            Brand = "Toshiba",
+            Model = "DT01",
+            Capacity = 1024,
             LifeResource = 300,
             Speed = 550,
-            Cost = 5899,
-            Type = "SATA"
+            Cost = 5299,
+            SpinSpeed = 7200
         };
 
         var ssdComplect = new ComponentComplect<StorageDevice>(ssd1, ssd2);
