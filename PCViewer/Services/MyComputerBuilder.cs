@@ -97,7 +97,7 @@ public class MyComputerBuilder : ComputerBuilder
             Cost = 11799
         };
 
-        var ssdComplect = new ComponentComplect<SSD>(ssd);
+        var ssdComplect = new ComponentComplect<StorageDevice>(ssd);
 
         _logger.Log("Собран комплект SSD");
 

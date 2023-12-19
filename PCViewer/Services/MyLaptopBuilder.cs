@@ -84,7 +84,7 @@ public class MyLaptopBuilder : LaptopBuilder
             Type = "SATA"
         };
 
-        var ssdComplect = new ComponentComplect<SSD>(ssd1, ssd2);
+        var ssdComplect = new ComponentComplect<StorageDevice>(ssd1, ssd2);
 
         _logger.Log("Собран комплект SSD");
 
