@@ -7,7 +7,7 @@ namespace PCViewer.Core.Models
     public class HDD : StorageDevice
     {
         /// <summary>
-        /// Скорость вращения вентилей
+        /// Скорость вращения вентилей (обороты в минуту)
         /// </summary>
         public int SpinSpeed { get; set; }
 
@@ -19,7 +19,7 @@ namespace PCViewer.Core.Models
 
             if (SpinSpeed != 0)
             {
-                sb.AppendLine($"Скорость вращения вентилей: {SpinSpeed}");
+                sb.AppendLine($"Скорость вращения вентилей: {SpinSpeed} об/мин");
             }
 
             return sb.ToString();
