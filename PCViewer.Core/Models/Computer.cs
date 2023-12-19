@@ -29,6 +29,15 @@ namespace PCViewer.Core.Models
 
             sb.AppendLine("-------------------------------------------");
             sb.AppendLine($"Суммарная цена данного компьютера {Cost}р.");
+            sb.AppendLine(GetPartsText());
+
+            return sb.ToString();
+        }
+
+        protected string GetPartsText()
+        {
+            var sb = new StringBuilder();
+
             sb.AppendLine("Информация о комплектующих предоставлена ниже.");
             sb.AppendLine();
 

@@ -61,14 +61,7 @@ namespace PCViewer.Core.Models
             #endregion
             sb.AppendLine();
 
-            // TODO: Decompose to a method
-            sb.AppendLine("Информация о комплектующих предоставлена ниже.");
-            sb.AppendLine();
-
-            foreach(var complect in Parts)
-            {
-                sb.AppendLine(complect.ToString());
-            }
+            sb.AppendLine(GetPartsText());
 
             return sb.ToString();
         }
